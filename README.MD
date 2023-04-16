@@ -1,6 +1,6 @@
-# CREATE REACT MODULE
+# CREATE REACT PACKAGE
 
-This package provides the minimum configuration to create a react module to be used as a package to export components with a preview for development
+This package provides the minimum configuration to create a react package to export components with a preview for development
 
 # USAGE
 

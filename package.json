@@ -1,7 +1,7 @@
 {
-  "name": "phantom-formv2",
-  "version": "1.0.8",
-  "description": "",
+  "name": "create-react-package",
+  "version": "1.0.0",
+  "description": "Tool to export component package to npm",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
