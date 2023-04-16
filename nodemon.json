@@ -1,0 +1,5 @@
+{
+  "watch": ["src"],
+  "ext": "js,ts,jsx,tsx",
+  "exec": "npm run reloadBundle && npx serve public"
+}

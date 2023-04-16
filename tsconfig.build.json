@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "target": "ES2015",
+        "module": "ES2020",
+        "noEmit": false,
+        "emitDeclarationOnly": false,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "outDir": "dist",
+    }
+  }
