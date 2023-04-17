@@ -1,7 +1,7 @@
 {
-  "name": "create-react-package",
+  "name": "create-react-package-esbuild",
   "version": "1.0.0",
-  "description": "Tool to export component package to npm",
+  "description": "Tool to export component package to npm with preview",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "de4dp1xl",
   "license": "ISC",
   "dependencies": {
     "@react-spring/web": "9.7.2",
