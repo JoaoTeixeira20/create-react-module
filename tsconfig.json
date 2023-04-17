@@ -3,7 +3,7 @@
     "exclude": [
       "public/js",
       "node_modules",
-      "src/Preview.tsx"
+      "src/Preview.tsx",
     ],
     "compilerOptions": {
       "module": "esnext",
@@ -22,6 +22,7 @@
       "noUnusedLocals": true,
       "noUnusedParameters": true,
       "moduleResolution": "node",
+      "resolveJsonModule": true,
       "jsx": "react",
       "esModuleInterop": true,
       "skipLibCheck": true,
