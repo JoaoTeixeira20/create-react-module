@@ -1,5 +1,6 @@
+import DynamicComponent from "./components/DynamicComponent/DynamicComponent";
 import SampleComponent, { SampleComponentProps }  from "./components/SampleComponent/SampleComponent"
 
-export default SampleComponent;
+export default DynamicComponent;
 
-export { SampleComponentProps }
+export { SampleComponent, SampleComponentProps }

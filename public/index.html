@@ -1,8 +1,20 @@
 <html>
-  <body>
-  <script type="module" src="/js/output.js"></script>
-  <h1>React</h1>
 
+<body>
+  <script type="module" src="js/output.js"></script>
+  <script>
+    const eventSource = new EventSource('http://localhost:3001/events');
+    eventSource.addEventListener('data', (event) => {
+      console.log('got data from addEventListener', event);
+    });
+    eventSource.onmessage = (e) => {
+      eventSource.close();
+      console.log('got onmessage',e);
+      window.location.reload();
+    };
+  </script>
+  <h1>React</h1>
   <div id="root"></div>
-  </body>
+</body>
+
 </html>

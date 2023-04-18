@@ -1,10 +1,11 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom/client';
-import SampleComponent from './components/SampleComponent/SampleComponent';
+import DynamicComponent from './components/DynamicComponent/DynamicComponent';
 
 // App Component
 const App = () => (<div>
-    <SampleComponent content={`im a new component :)`}/>
+    <DynamicComponent />
+    <div>i am a beast</div>
 </div>)
 // Mount component 
 const root = ReactDOM.createRoot(

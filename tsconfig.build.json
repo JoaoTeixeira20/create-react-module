@@ -2,12 +2,9 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "target": "ES6",
-        "module": "CommonJS",
+        "module": "ESNext",
         "noEmit": false,
         "emitDeclarationOnly": true,
         "sourceMap": false,
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "allowSyntheticDefaultImports": true,
     }
-  }
+}

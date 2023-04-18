@@ -2,8 +2,9 @@ require('esbuild').build({
     entryPoints: ['src/index.ts'],
     bundle: true,
     minify: true,
-    format: 'cjs',
+    format: 'esm',
     target: ['es6'],
-    outfile: 'dist/index.js',
-    external: ['@react-spring/web','react','react-dom']
+    outdir: 'dist',
+    splitting: true,
+    external: ['@react-spring/web','react','react-dom','styled-components']
 });
