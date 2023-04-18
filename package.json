@@ -9,12 +9,11 @@
   ],
   "module": "dist/index.js",
   "scripts": {
-    "dev": "es-dev-server",
-    "start": "npx nodemon --config nodemon.json",
-    "reloadBundle": "node esBuildReload.config.js --watch",
+    "start": "node client-env-config.js && concurrently \"npm run start:react-preview\" \"npm run start:hot-reload-server",
+    "start:react-preview": "node esbuildwatch.config.js",
+    "start:hot-reload-server": "node sse-hot-reload-handler/sse-server.js",
     "build": "npx tsc --project tsconfig.build.json && node esbuild.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "workingWatcher": "npx esbuild src/Preview.tsx --bundle --outdir=public/js --watch --servedir=public"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "de4dp1xl",
@@ -29,14 +28,10 @@
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.26",
-    "axios": "^1.3.5",
-    "es-dev-server": "^2.1.0",
     "esbuild": "^0.17.16",
     "eslint": "^8.38.0",
-    "nodemon": "^2.0.22",
-    "puppeteer-core": "^19.9.1",
-    "serve": "^14.2.0",
-    "socket.io": "^4.6.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "concurrently": "^8.0.1",
+    "dotenv": "^16.0.3"
   }
 }

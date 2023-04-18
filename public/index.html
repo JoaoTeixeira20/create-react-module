@@ -1,17 +1,9 @@
 <html>
 
 <body>
-  <script type="module" src="js/output.js"></script>
-  <script>
-    const eventSource = new EventSource('http://localhost:3001/events');
-    eventSource.addEventListener('data', (event) => {
-      console.log('got data from addEventListener', event);
-    });
-    eventSource.onmessage = (e) => {
-      eventSource.close();
-      console.log('got onmessage',e);
-      window.location.reload();
-    };
+  <script src="js/config/config.js"></script>
+  <script type="module" src="js/src/Preview.js"></script>
+  <script type="module" src="js/sse-hot-reload-handler/sse-client.js"></script>
   </script>
   <h1>React</h1>
   <div id="root"></div>
