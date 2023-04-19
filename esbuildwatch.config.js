@@ -28,14 +28,14 @@ async function watch() {
         banner: {
             js: `(() => new EventSource("http://localhost:${reactPreviewProxyPort}/event").onmessage = () => location.reload())();`,
         },
-        outdir: 'public/js',
+        outdir: 'public/.js',
         plugins,
     })
     await ctx.watch();
 
     const server = await ctx.serve({
         servedir: 'public',
-        ...{...esbuildServerPort && {port: esbuildServerPort}}
+        ...(esbuildServerPort && {port: esbuildServerPort})
     })
 
     http.createServer((req, res) => {

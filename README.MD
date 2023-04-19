@@ -66,10 +66,11 @@ For debugging, I have sourcemap enabled on esbuild on dev mode that enables brea
 
 # IMPROVEMENTS
 
-Error handling on build implementations.
-Ability to select an host instead of localhost.
-Using a single server for hot-reload feature.
-Addition of config for jest tests on developed components for build export.
+- Error handling on hot-reload build implementations.
+- Ability to select an host instead of localhost.
+- Using a single server for hot-reload feature.
+- Compatibility with older javascript versions (currently shipping on ES6 and dependent on project target transpilers).
+- Addition of config for jest tests on developed components for build export.
 # NOTES
 
 I'm fresh on packaging and npm publishing, so any stupid thing i said on the readme, feel free to correct me :smiley:
