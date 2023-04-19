@@ -9,9 +9,7 @@
   ],
   "module": "dist/index.js",
   "scripts": {
-    "start": "node client-env-config.js && concurrently \"npm run start:react-preview\" \"npm run start:hot-reload-server",
-    "start:react-preview": "node esbuildwatch.config.js",
-    "start:hot-reload-server": "node sse-hot-reload-handler/sse-server.js",
+    "start": "node esbuildwatch.config.js",
     "build": "npx tsc --project tsconfig.build.json && node esbuild.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,9 +27,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.26",
     "esbuild": "^0.17.16",
-    "eslint": "^8.38.0",
     "typescript": "^5.0.4",
-    "concurrently": "^8.0.1",
     "dotenv": "^16.0.3"
   }
 }

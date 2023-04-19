@@ -1,6 +1,4 @@
-/public/js/src
-/public/js/sse-hot-reload-handler
-/public/js/config/config.js
+/public/js/
 /dist/
 /node_modules/
 .env

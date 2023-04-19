@@ -9,7 +9,6 @@ const DynamicComponent = (): ReactElement => {
         <Suspense fallback={<div>loading...</div>}>
             <SampleComponentLazy content={`i'm lazy.. D:`}/> 
         </Suspense>
-        <div>you are awesome</div>
     </S.Container>)
 }
 

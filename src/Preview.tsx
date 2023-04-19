@@ -4,7 +4,7 @@ import DynamicComponent from './components/DynamicComponent/DynamicComponent';
 
 const App = () => (<div>
     <DynamicComponent />
-    <div>yoowo</div>
+    <div>hi</div>
 </div>)
 
 const root = ReactDOM.createRoot(

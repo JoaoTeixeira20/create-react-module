@@ -1,22 +1,23 @@
 # CREATE REACT PACKAGE
 
-This package provides the minimum configuration to create a react package to export components with a preview for development
+This package provides the minimum configuration to create a react package to export components with a preview for development... And it's blazingly fast!
 
 # USAGE
 
 ## Notes before using
 
-Create the **.env** configuration file before using this project and set the ports where you want to run this project (example using bash)
+Create the **.env** configuration file if you want to configure the ports where the dev servers will run (example using bash)
 
     cp .env.example .env
 
-This is the port where the preview server will run, default is 3000 (where you preview your components)
+This is the port where the hot reload server will run, default is 3000
 
-> REACT_PREVIEW_EXAMPLE_SERVER_PORT
+> REACT_PREVIEW_PROXY_PORT
 
-This is the port where the hot-reload server will run, default is 3001
+This is the port where the esbuild server will run, if you don't specify one, it will run on a randomly port
 
-> HOT_RELOAD_SSE_SERVER_PORT
+> ESBUILD_SERVER_PORT
+
 ## Installation
 
     npm i
@@ -35,13 +36,21 @@ To build the application for npm publishing, first ensure all you want to bundle
 
 > src/index.ts
 
-This file is ignored from the src directory
+This file is ignored from the src directory on the build process (only used to preview your app before shipping)
 
 > src/Preview.tsx
 
 # UNDER THE HOOD
 
-For **preview mode**, it's being used esbuild watch and serve feature along with an eventSource server to emit reloads when the files change, the eventSource client it's loaded into the html entrypoint page that loads the port configuration along with the bundle from esbuild
+For **preview mode**, the hot reload it's a combination of this solutions:
+
+https://github.com/evanw/esbuild/issues/802
+
+implemented on the new esbuild context API with a proxy server suggested on the documentation of esbuild:
+
+https://esbuild.github.io/api/#serve-proxy
+
+the entrypoint of the server is
 
 > public/index.html
 
@@ -53,20 +62,20 @@ That extends
 
 > tsconfig.json
 
-For debugging, I have sourcemap enabled on esbuild that enables breakpoints on the **src** directory (a vscode debugging config is included on the project)
+For debugging, I have sourcemap enabled on esbuild on dev mode that enables breakpoints on the **src** directory (a vscode debugging config is included on the project)
 
 # IMPROVEMENTS
 
-Error handling on esbuild and eventSource servers and if port configuration is missing.
-The server doesn't check if the port is used doesn't give feedback on the issue.
-default ports are hardcoded and spreaded on the project, needs refactor.
-Automation tests.
+Error handling on build implementations.
+Ability to select an host instead of localhost.
+Using a single server for hot-reload feature.
+Addition of config for jest tests on developed components for build export.
 # NOTES
 
 I'm fresh on packaging and npm publishing, so any stupid thing i said on the readme, feel free to correct me :smiley:
 
 My motivation was messing around with esbuild and go over the edge on it's capabilities, hot reload it's not officially supported and this implementation goes kinda around the block to achieve that.
 
-Since the watch context doesn't allow configurations yet and the only way to catch file changes to emit events it's implementing a plugin that has access to the build events, i can wait for onEnd to request a reload to the sse server that is subscribed by the browser client that will receive the event to reload the page, but it's a hacky way and requires an additional server to handle hot reloading of the browser.
+The esbuild context allows to listen to build events by implementing a plugin on the context that has access to that event, i can wait for **onEnd** to request and update on the clients array that then emit an sse event that it's triggered by a js banner injection declaration on the bundle of an eventSource that will listen the refresh event launched on the proxy server.
 
 HMR isn't also supported and i didn't digged on that way.

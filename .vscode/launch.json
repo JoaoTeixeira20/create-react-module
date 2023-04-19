@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug client Windows",
+            "name": "Debug client",
             "request": "launch",
             "type": "chrome",
             "url": "http://localhost:3000",
