@@ -35,7 +35,7 @@ async function watch() {
 
     const server = await ctx.serve({
         servedir: 'public',
-        ...{...esbuildServerPort && {port: esbuildServerPort}}
+        ...(esbuildServerPort && {port: esbuildServerPort})
     })
 
     http.createServer((req, res) => {
