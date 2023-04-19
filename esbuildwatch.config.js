@@ -2,8 +2,8 @@ require('dotenv').config();
 const esbuild = require('esbuild');
 const http = require('http');
 
-const reactPreviewServerPort = parseInt(process.env.REACT_PREVIEW_EXAMPLE_SERVER_PORT);
-const sseServerPort = parseInt(process.env.HOT_RELOAD_SSE_SERVER_PORT);
+const reactPreviewServerPort = parseInt(process.env.REACT_PREVIEW_EXAMPLE_SERVER_PORT) || 3000;
+const sseServerPort = parseInt(process.env.HOT_RELOAD_SSE_SERVER_PORT) || 3001;
 
 const options = {
     hostname: 'localhost',

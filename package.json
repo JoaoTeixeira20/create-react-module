@@ -9,7 +9,7 @@
   ],
   "module": "dist/index.js",
   "scripts": {
-    "start": "node client-env-config.js && concurrently \"npm run start:react-preview\" \"npm run start:hot-reload-server",
+    "start": "node client-env-config.js && concurrently \"npm run start:react-preview\" \"npm run start:hot-reload-server\"",
     "start:react-preview": "node esbuildwatch.config.js",
     "start:hot-reload-server": "node sse-hot-reload-handler/sse-server.js",
     "build": "npx tsc --project tsconfig.build.json && node esbuild.config.js",
