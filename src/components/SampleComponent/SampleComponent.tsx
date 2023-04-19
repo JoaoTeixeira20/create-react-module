@@ -11,6 +11,7 @@ const SampleComponent = (props: SampleComponentProps): ReactElement => {
         transform: 'perspective(600px) rotateX(0deg)',
         backgroundColor: '#747899',
         to: {
+            color: 'transparent',
             transform: 'perspective(600px) rotateX(180deg)',
             backgroundColor: '#789974'
         },
@@ -21,12 +22,14 @@ const SampleComponent = (props: SampleComponentProps): ReactElement => {
     const loopFunc = () => {
         if (isFlipped.current) {
             api.start({
+                color: 'transparent',
                 transform: 'perspective(600px) rotateX(180deg)',
                 backgroundColor: '#789974'
             })
             isFlipped.current = false
         } else {
             api.start({
+                color: 'black',
                 transform: 'perspective(600px) rotateX(0deg)',
                 backgroundColor: '#747899',
             })
@@ -46,7 +49,7 @@ const SampleComponent = (props: SampleComponentProps): ReactElement => {
         flexDirection: "row",
         width: "500px",
         height: "500px",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
     }}>
         {trail.map((style, i) => {
             return (<animated.div style={{
