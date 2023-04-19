@@ -5,8 +5,8 @@ const { EventEmitter } = require('events');
 
 const eventEmitter = new EventEmitter();
 
-const reactPreviewServerPort = parseInt(process.env.REACT_PREVIEW_EXAMPLE_SERVER_PORT);
-const sseServerPort = parseInt(process.env.HOT_RELOAD_SSE_SERVER_PORT);
+const reactPreviewServerPort = parseInt(process.env.REACT_PREVIEW_EXAMPLE_SERVER_PORT) || 3000;
+const sseServerPort = parseInt(process.env.HOT_RELOAD_SSE_SERVER_PORT) || 3001;
 
 const server = http.createServer((req, res) => {
   const reqUrl = url.parse(req.url);
