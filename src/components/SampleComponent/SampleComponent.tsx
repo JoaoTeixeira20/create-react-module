@@ -6,43 +6,41 @@ export type SampleComponentProps = {
 }
 
 const SampleComponent = (props: SampleComponentProps): ReactElement => {
+    const elements = props.content.split('');
+    const loopTimer = 280*elements.length > 1500 ? 280*elements.length : 1500;
 
-    const [trail, api] = useTrail(9, () => ({
+    const [trail, api] = useTrail(elements.length, () => ({
         transform: 'perspective(600px) rotateX(0deg)',
         backgroundColor: '#747899',
-        to: {
-            color: 'transparent',
-            transform: 'perspective(600px) rotateX(180deg)',
-            backgroundColor: '#789974'
-        },
+        color: 'black',
     }));
 
     const isFlipped = useRef(false)
 
     const loopFunc = () => {
-        if (isFlipped.current) {
+        if (!isFlipped.current) {
             api.start({
                 color: 'transparent',
                 transform: 'perspective(600px) rotateX(180deg)',
                 backgroundColor: '#789974'
             })
-            isFlipped.current = false
+            isFlipped.current = true
         } else {
             api.start({
                 color: 'black',
                 transform: 'perspective(600px) rotateX(0deg)',
                 backgroundColor: '#747899',
             })
-            isFlipped.current = true
+            isFlipped.current = false
         }
     }
 
-    const interval = setInterval(loopFunc, 2500)
-    const unmount = () => clearInterval(interval);
-
     useEffect(() => {
+        const interval = setInterval(loopFunc, loopTimer);
+        const unmount = () => clearInterval(interval);
+        isFlipped.current = false;
         return unmount;
-    },[])
+    },[props.content]);
 
     return (<div style={{
         display: "flex",
@@ -54,6 +52,7 @@ const SampleComponent = (props: SampleComponentProps): ReactElement => {
         {trail.map((style, i) => {
             return (<animated.div style={{
                 width: "100%",
+                maxHeight: "200px",
                 flex: "0 0 33.333333%",
                 outline: "1px solid black",
                 transformStyle: 'preserve-3d',
@@ -62,7 +61,7 @@ const SampleComponent = (props: SampleComponentProps): ReactElement => {
                 justifyContent: 'center',
                 ...style,
             }} key={i}>
-                <p>{`${props.content}`}</p>
+                <p>{`${elements[i]}`}</p>
             </animated.div>)
         })}
     </div>)
