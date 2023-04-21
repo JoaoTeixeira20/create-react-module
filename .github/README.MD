@@ -24,7 +24,7 @@ This is the port where the esbuild server will run, default is 3000
 
 To start the application on preview mode, it will start a server on default port 3000 with everything you declare on the path above, (the entrypoint of your app)
 
-> src/Preview.tsx
+> src/development/Preview.tsx
 
     npm run build
 
@@ -32,11 +32,13 @@ To build the application for npm publishing, first ensure all you want to bundle
 
 > src/index.ts
 
-This file is ignored from the src directory on the build process (only used to preview your app before shipping)
+This folder is ignored from the src directory on the build process (only used to preview your app before shipping)
 
-> src/Preview.tsx
+> src/development
 
 # UNDER THE HOOD
+
+## Preview
 
 For **preview mode**, the hot reload it's implemented with feature:
 
@@ -51,6 +53,14 @@ there is an eventSource that will listen to changes emmited by the esbuild conte
 the entrypoint of the server is
 
 > public/index.html
+
+It's implemented an error stack tracing wrapper that catches rendering erros with an error boundary
+
+https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary
+
+this wrapper also prints the stack trace back from your components names and paths
+
+## Build
 
 For **build mode** it's being used tsc compiler to generate js and types declarations from
 
@@ -68,6 +78,7 @@ For debugging, I have sourcemap enabled on esbuild on dev mode that enables brea
 - Ability to select an host instead of localhost.
 - Compatibility with older javascript versions (currently shipping on ES6 and dependent on project target transpilers).
 - Addition of config for jest tests on developed components for build export.
+- Special file types bundling (like svgs for example)
 # NOTES
 
 I'm fresh on packaging and npm publishing, I wanted to improve the bundling of types and the old javascript compatibility but relying only on esbuild
