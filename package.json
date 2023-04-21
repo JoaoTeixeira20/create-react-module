@@ -23,11 +23,14 @@
     "styled-components": "^5.3.9"
   },
   "devDependencies": {
+    "@types/node": "^18.15.13",
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.26",
+    "dotenv": "^16.0.3",
     "esbuild": "^0.17.16",
-    "typescript": "^5.0.4",
-    "dotenv": "^16.0.3"
+    "prettier": "^2.8.7",
+    "sourcemapped-stacktrace": "^1.1.11",
+    "typescript": "^5.0.4"
   }
 }
