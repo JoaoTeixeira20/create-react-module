@@ -1,6 +1,6 @@
 {
   "name": "create-react-package-esbuild",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Tool to export component package to npm with preview",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

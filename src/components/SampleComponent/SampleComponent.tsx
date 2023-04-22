@@ -64,6 +64,8 @@ const SampleComponent = (props: SampleComponentProps): ReactElement => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              fontSize: "25px",
+              fontWeight: "bold",
               ...style,
             }}
             key={i}
