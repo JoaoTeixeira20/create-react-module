@@ -19,7 +19,8 @@ async function watch() {
   const ctx = await esbuild.context({
     entryPoints: ['src/development/Preview.tsx'],
     bundle: true,
-    minify: true,
+    minifySyntax: true,
+    minifyWhitespace: true,
     format: 'esm',
     sourcemap: true,
     outdir: 'public/.js',

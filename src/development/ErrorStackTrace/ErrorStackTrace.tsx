@@ -2,9 +2,7 @@ import React, {
   Component,
   PropsWithChildren,
   useEffect,
-  useState,
 } from 'react';
-import { mapStackTrace } from 'sourcemapped-stacktrace';
 
 type TparseStackTraceLine = {
   at: string;
@@ -12,36 +10,32 @@ type TparseStackTraceLine = {
   file: string;
 };
 
-function parseStackTraceLine(stack: string): TparseStackTraceLine {
-  const regex = /at (\S+) \((.+?):(\d+):(\d+)\)/;
-  const match = regex.exec(stack);
+function parseStackTraceLine(line: string): TparseStackTraceLine | null {
+  const pattern = /^at (.+) \((.+):(\d+):(\d+)\)$/;
+  const match = pattern.exec(line.trim());
 
-  if (!match) {
+  if (match) {
+    const [, at, link, lineNo, column] = match;
+    const file = `${link.substring(link.lastIndexOf('/') + 1)}:${lineNo}:${column}`;
+
     return {
-      at: '',
-      file: '',
-      link: '',
+      at,
+      file,
+      link,
     };
   }
-
-  const [, at, link, line, column] = match;
-  const file = link.substring(link.lastIndexOf('/') + 1);
-
-  return { at, link, file: `${file}:${line}:${column}` };
+  return null;
 }
 
 function ErrorFormatter({ error }: { error: Error }) {
-  const [stackTrace, setStackTrace] = useState<TparseStackTraceLine[]>();
+  const stackTrace =
+    error.stack && error.stack.split('\n').flatMap((el) => {
+      const line = parseStackTraceLine(el);
+      return line ? [line] : [];
+    });
 
   useEffect(() => {
-    window.document.body.style.backgroundColor = "black";
-    mapStackTrace(error.stack, function (mappedStack) {
-      setStackTrace(
-        mappedStack.map((el) => {
-          return parseStackTraceLine(el);
-        })
-      );
-    });
+    window.document.body.style.backgroundColor = 'black';
   }, []);
 
   return (
@@ -54,7 +48,13 @@ function ErrorFormatter({ error }: { error: Error }) {
         backgroundColor: 'black',
       }}
     >
-      <h1 style={{ color: 'whitesmoke', padding: '10px', fontFamily: 'Courier New' }}>
+      <h1
+        style={{
+          color: 'whitesmoke',
+          padding: '10px',
+          fontFamily: 'Courier New',
+        }}
+      >
         {error.name} : {error.message}
       </h1>
       <div style={{ padding: '10px' }}>
@@ -70,7 +70,7 @@ function ErrorFormatter({ error }: { error: Error }) {
             </div>
           ))
         ) : (
-          <div style={{color: 'whitesmoke'}}>loading stack trace...</div>
+          <div style={{ color: 'whitesmoke' }}>loading stack trace...</div>
         )}
       </div>
     </div>
