@@ -26,7 +26,7 @@ async function watch() {
     define: {
       'process.env.NODE_ENV': JSON.stringify('development'),
     },
-    sourceRoot: 'vscode://' + path.resolve(__dirname, 'src') + path.normalize('/'),
+    //sourceRoot: 'vscode://' + path.resolve(__dirname, 'src') + path.normalize('/'),
     plugins,
   });
   await ctx.watch();
