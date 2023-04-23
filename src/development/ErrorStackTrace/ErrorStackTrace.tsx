@@ -2,7 +2,9 @@ import React, {
   Component,
   PropsWithChildren,
   useEffect,
+  useState,
 } from 'react';
+import { mapStackTrace } from 'sourcemapped-stacktrace';
 
 type TparseStackTraceLine = {
   at: string;
@@ -10,32 +12,40 @@ type TparseStackTraceLine = {
   file: string;
 };
 
-function parseStackTraceLine(line: string): TparseStackTraceLine | null {
-  const pattern = /^at (.+) \((.+):(\d+):(\d+)\)$/;
-  const match = pattern.exec(line.trim());
+function parseStackTraceLine(stack: string): TparseStackTraceLine {
+  const regex = /at (\S+) \((.+?):(\d+):(\d+)\)/;
+  const match = regex.exec(stack);
 
-  if (match) {
-    const [, at, link, lineNo, column] = match;
-    const file = `${link.substring(link.lastIndexOf('/') + 1)}:${lineNo}:${column}`;
-
+  if (!match) {
     return {
-      at,
-      file,
-      link,
+      at: '',
+      file: '',
+      link: '',
     };
   }
-  return null;
+
+  const [, at, link, line, column] = match;
+  const file = link.substring(link.lastIndexOf('/') + 1);
+
+  return {
+    at,
+    link: link.startsWith('http') ? link.replace(/^http/, 'devtools') : link,
+    file: `${file}:${line}:${column}`,
+  };
 }
 
 function ErrorFormatter({ error }: { error: Error }) {
-  const stackTrace =
-    error.stack && error.stack.split('\n').flatMap((el) => {
-      const line = parseStackTraceLine(el);
-      return line ? [line] : [];
-    });
+  const [stackTrace, setStackTrace] = useState<TparseStackTraceLine[]>();
 
   useEffect(() => {
     window.document.body.style.backgroundColor = 'black';
+    mapStackTrace(error.stack, function (mappedStack) {
+      setStackTrace(
+        mappedStack.map((el) => {
+          return parseStackTraceLine(el);
+        })
+      );
+    });
   }, []);
 
   return (
