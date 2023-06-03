@@ -1,5 +1,3 @@
-const cssModulesPlugin = require('esbuild-css-modules-plugin');
-
 require('esbuild').build({
   entryPoints: ['src/index.ts'],
   bundle: true,
@@ -9,5 +7,4 @@ require('esbuild').build({
   outdir: 'dist',
   splitting: true,
   external: ['@react-spring/web', 'react', 'react-dom', 'styled-components'],
-  plugins: [cssModulesPlugin()],
 });

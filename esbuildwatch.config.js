@@ -1,7 +1,6 @@
 require('dotenv').config();
 const esbuild = require('esbuild');
-//const path = require('path');
-const cssModulesPlugin = require('esbuild-css-modules-plugin');
+const path = require('path');
 
 const esbuildPort = parseInt(process.env.ESBUILD_SERVER_PORT) || 3000;
 
@@ -14,7 +13,6 @@ const plugins = [
       });
     },
   },
-  cssModulesPlugin(),
 ];
 
 async function watch() {
