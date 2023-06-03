@@ -8,6 +8,7 @@ const App = () => (
   <>
     <GlobalStyle />
     <ErrorStackTrace>
+      <div className='text-red-600 bg-blue-600'>hello tailwind</div>
       <DynamicComponent />
     </ErrorStackTrace>
   </>
